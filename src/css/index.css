@@ -5,6 +5,18 @@
   --battle-background: url("../assets/battle-background.jpg");
 }
 
+.pokemon-pic {
+  height: 16rem;
+  width: 16rem;
+  transition: all 0.5s;
+  filter: drop-shadow(4px 4px 8px  red);
+}
+
+.pokemon-pic:hover {
+  height: 14rem;
+  width: 14rem;
+}
+
 body,
 .battle-container,
 .pokemons,
@@ -39,6 +51,11 @@ body {
   height: 30rem;
   background-image: var(--pokemon-background-ground);
   flex-direction: column;
+  justify-content: flex-end;
+  border-radius: 1rem;
+  box-shadow:
+    4px 4px 2px white,
+    -4px -4px 2px white;
 }
 
 button {
@@ -56,10 +73,19 @@ button {
 
 .poke-stats {
   width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  justify-content: space-around;
+  align-items: center;
   height: 4rem;
-  background: var(--pokemon-container-color);
+  background: var(--background-color);
   color: white;
   font-weight: bold;
   text-align: center;
-  margin-top: 4.5rem;
+  border-radius: 1.1rem;
+  border: 2px dotted white;
+}
+
+img {
+  image-rendering: pixelated;
 }

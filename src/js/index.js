@@ -1,29 +1,74 @@
-const pokemons = {
-  0: { name: "bulbasaur", atk: 49, hp: 45 },
-  1: { name: "ivysaur", atk: 62, hp: 60 },
-  2: { name: "venusaur", atk: 82, hp: 80 },
-  3: { name: "charizard", atk: 84, hp: 78 },
-};
-const button = document.querySelector(".start-button");
-const leftPokemon = {
-  data: {},
-  pokemonPicDiv: document.querySelectorAll(".pokemon")[0],
-  pokemonStatsDiv: document.querySelectorAll(".poke-stats")[0]
-};
-const rightPokemon = {
-  data: {},
-  pokemonPicDiv: document.querySelectorAll(".pokemon")[1],
-  pokemonStatsDiv: document.querySelectorAll(".poke-stats")[1]
-};
-const setRandomPokemons = () => {
-  const leftPokemonIndex = Math.floor(Math.random() * Object.keys(pokemons).length);
-  const rightPokemonIndex = Math.floor(Math.random() * Object.keys(pokemons).length);
-  leftPokemon.data = pokemons[leftPokemonIndex];
-  rightPokemon.data = pokemons[rightPokemonIndex];
-  leftPokemon.pokemonPicDiv.textContent = leftPokemon.data.name;
-  rightPokemon.pokemonPicDiv.textContent = rightPokemon.data.name;
-  leftPokemon.pokemonStatsDiv.textContent = `Ataque: ${leftPokemon.data.atk} | HP: ${leftPokemon.data.hp}`;
-  rightPokemon.pokemonStatsDiv.textContent = `Ataque: ${rightPokemon.data.atk} | HP: ${rightPokemon.data.hp}`;
+import _ from "lodash";
+
+// DOM
+const startButton = document.querySelector(".start-button");
+const [topPokemonPicDiv, bottomPokemonPicDiv] = document.querySelectorAll(".pokemon");
+const [topPokemonStatsDiv, bottomPokemonStatsDiv] = document.querySelectorAll(".poke-stats");
+
+const getAllPokemons = async() => {
+  const pokemonApiPrefix = "https://pokeapi.co/api/v2/pokemon/";
+  const randomIndexesForPokemons = _.shuffle(_.range(1, 100)).slice(0, 2);
+  console.log(randomIndexesForPokemons);
+  clearBattle();
+  localStorage.setItem("pokemonIndexes", JSON.stringify(randomIndexesForPokemons));
+  await randomIndexesForPokemons.map((pokemonIndex) => {
+    return fetch(`${pokemonApiPrefix + pokemonIndex}`)
+      .then((response) => response.json())
+      .then((pokemon) => {
+        const pokemonData = {
+          name: pokemon.name.toUpperCase(),
+          hp: pokemon.stats[0].base_stat,
+          attack: pokemon.stats[1].base_stat,
+          defense: pokemon.stats[2].base_stat,
+          front_img: pokemon.sprites.front_default,
+          back_img: pokemon.sprites.back_default,
+        };
+        localStorage.setItem(pokemonIndex, JSON.stringify(pokemonData));
+      });
+  });
+  setPokemon(topPokemon);
+  setPokemon(bottomPokemon);
 };
 
-button.addEventListener("click", () => setRandomPokemons());
+const getStoredPokemonIndex = (pokemonIndex) => JSON.parse(localStorage.getItem("pokemonIndexes"))[pokemonIndex];
+const getStoredPokemon = (index) => JSON.parse(localStorage.getItem(getStoredPokemonIndex(index)));
+const topPokemon = {
+  data: getStoredPokemon(0),
+  picDiv: topPokemonPicDiv,
+  statsDiv: topPokemonStatsDiv
+};
+const bottomPokemon = {
+  data: getStoredPokemon(1),
+  picDiv: bottomPokemonPicDiv,
+  statsDiv: bottomPokemonStatsDiv
+};
+const clearBattle = () => {
+  localStorage.clear();
+  topPokemon.picDiv.childNodes.forEach((child) => child.remove());
+  bottomPokemon.picDiv.childNodes.forEach((child) => child.remove());
+  topPokemon.statsDiv.childNodes.forEach((child) => child.remove());
+  bottomPokemon.statsDiv.childNodes.forEach((child) => child.remove());
+};
+
+const setPokemon = (pokemon) => {
+  const pokemonImage = document.createElement("img");
+  const pokemonName = document.createElement("div");
+  const pokemonAttack = document.createElement("div");
+  const pokemonDefense = document.createElement("div");
+  const pokemonHp = document.createElement("div");
+  const basicStats = [pokemonName, pokemonAttack, pokemonHp, pokemonDefense];
+  pokemonName.textContent = "Name: " + pokemon.data.name;
+  pokemonAttack.textContent = "Attack: " + pokemon.data.attack;
+  pokemonHp.textContent = "HP: " + pokemon.data.hp;
+  pokemonDefense.textContent = "Defense: " + pokemon.data.defense;
+  pokemonImage.src = pokemon.data.front_img;
+  pokemonImage.classList.add("pokemon-pic");
+  pokemon.picDiv.appendChild(pokemonImage);
+  basicStats.forEach((stat) => {
+    stat.classList.add("stat");
+    pokemon.statsDiv.appendChild(stat);
+  });
+};
+
+// Listeners
+startButton.addEventListener("click", () => getAllPokemons());
