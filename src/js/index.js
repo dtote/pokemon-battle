@@ -24,7 +24,7 @@ const [image2, name2, attack2, defense2, hp2] =
 ];
 const topBasicStats = [image1, name1, attack1, defense1, hp1];
 const bottomBasicStats = [image2, name2, attack2, defense2, hp2];
-const getTwoRandomNumbers = () => _.shuffle(_.range(1, 100)).slice(0, 2);
+const getTwoRandomNumbers = () => _.shuffle(_.range(1, 151)).slice(0, 2);
 
 const fetchPokemonData = (index) => {
   const pokemonApiPrefix = "https://pokeapi.co/api/v2/pokemon/";
