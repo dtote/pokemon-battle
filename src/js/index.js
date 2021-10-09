@@ -5,13 +5,22 @@ const startButton = document.querySelector(".start-button");
 const [topPokemonPicDiv, bottomPokemonPicDiv] = document.querySelectorAll(".pokemon");
 const [topPokemonStatsDiv, bottomPokemonStatsDiv] = document.querySelectorAll(".poke-stats");
 
-const getAllPokemons = async() => {
+const getTwoRandomNumbers = () => _.shuffle(_.range(1, 100)).slice(0, 2);
+
+const fetchPokemonData = async() => {
   const pokemonApiPrefix = "https://pokeapi.co/api/v2/pokemon/";
-  const randomIndexesForPokemons = _.shuffle(_.range(1, 100)).slice(0, 2);
-  console.log(randomIndexesForPokemons);
-  clearBattle();
-  localStorage.setItem("pokemonIndexes", JSON.stringify(randomIndexesForPokemons));
-  await randomIndexesForPokemons.map((pokemonIndex) => {
+  const pokemonIndexes = getTwoRandomNumbers();
+  return await pokemonIndexes.map((index) => {
+    return fetch(`${pokemonApiPrefix + index}`)
+      .then((response) => response.json())
+      .then((data) => data);
+  });
+};
+
+const getAllPokemons = async() => {
+  // clearBattle();
+  // localStorage.setItem("pokemonIndexes", JSON.stringify(pokemonIndexes));
+  await pokemonIndexes.map((pokemonIndex) => {
     return fetch(`${pokemonApiPrefix + pokemonIndex}`)
       .then((response) => response.json())
       .then((pokemon) => {
