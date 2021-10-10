@@ -25,10 +25,11 @@ const [image2, name2, attack2, defense2, hp2] =
   createElement("div")
 ];
 
-// Cnost
 const pokemonGenRanges = [[1, 151], [152, 251], [252, 386], [387, 490], [491, 649], [650, 721], [722, 802], [803, 889]];
 const topBasicStats = [image1, name1, attack1, defense1, hp1];
 const bottomBasicStats = [image2, name2, attack2, defense2, hp2];
+
+// Functions
 const getTwoRandomNumbers = (start = 1, end = 151) => _.shuffle(_.range(start, end)).slice(0, 2);
 const getPokemonGenRange = () => pokemonGenRanges[parseInt(genSelector.value) - 1];
 

@@ -2,7 +2,7 @@
   --background-color: #000;
   --pokemon-container-color: #222;
   --pokemon-background-ground: url("../assets/background-ground.jpg");
-  --battle-background: url("../assets/battle-background.jpg");
+  --battle-background: url("../assets/wp-battle.jpg");
   --font-type: 'EnterCommand';
 }
 
@@ -19,7 +19,9 @@
   height: 16rem;
   width: 16rem;
   transition: all 0.5s;
-  filter: drop-shadow(4px 4px 8px  red);
+  filter:
+    drop-shadow(4px 4px 6px  rgb(255, 255, 255))
+    drop-shadow(6px 6px 10px  rgb(255, 0, 0));
 }
 
 .pokemon-pic:hover {
@@ -66,12 +68,25 @@ body {
   border-radius: 1rem;
   box-shadow:
     4px 4px 2px white,
-    -4px -4px 2px white;
+    -4px -4px 2px white,
+    6px 6px 4px black,
+    -6px -6px 4px black;
 }
 
 .middle {
-  border-radius: 20px;
+  border-radius: 1.2rem;
   margin: 1rem;
+  font-weight: bold;
+  border: 0.15rem solid white;
+  box-shadow:
+    2px 2px 2px white,
+    4px 4px 4px black;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  transition: background-color 0.5s;
+}
+
+.middle:hover {
+  background: rgba(255, 0, 0, 0.301);
 }
 
 .pokemon {
@@ -83,7 +98,7 @@ body {
 }
 
 .poke-stats {
-  width: 100%;
+  width: 90%;
   display: grid;
   grid-template-columns: repeat(2, auto);
   justify-content: space-around;
@@ -94,7 +109,11 @@ body {
   font-weight: bold;
   text-align: center;
   border-radius: 1.1rem;
-  border: 2px dotted white;
+  border: 0.1rem solid white;
+  box-shadow:
+    2px 2px 2px black,
+    -2px -2px 2px black;
+  margin-bottom: 1rem;
 }
 
 img {
