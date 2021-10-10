@@ -3,6 +3,16 @@
   --pokemon-container-color: #222;
   --pokemon-background-ground: url("../assets/background-ground.jpg");
   --battle-background: url("../assets/battle-background.jpg");
+  --font-type: 'EnterCommand';
+}
+
+@font-face {
+  font-family: 'EnterCommand';
+  font-style: normal;
+  font-weight: 500;
+  src:
+    local('Open Sans'),
+    url(/fonts/EnterCommand-Bold.ttf) format('truetype');
 }
 
 .pokemon-pic {
@@ -33,6 +43,7 @@ body {
   height: 100vh;
   background: var(--battle-background);
   flex-direction: column;
+  font-family: var(--font-type);
 }
 
 .battle-container {

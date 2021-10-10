@@ -1,29 +1,32 @@
 import _ from "lodash";
 
-const createHtmlElement = (type) => document.createElement(type);
+// Auxiliar function
+const createElement = (type) => document.createElement(type);
 
 // DOM
 const startButton = document.querySelector(".start-button");
 const genSelector = document.querySelector(".gen-selector");
-const pokemonGenRanges = [[1, 151], [152, 251], [252, 386], [387, 490], [491, 649], [650, 721], [722, 802], [803, 889]];
 const [topPokemonPicDiv, bottomPokemonPicDiv] = document.querySelectorAll(".pokemon");
 const [topPokemonStatsDiv, bottomPokemonStatsDiv] = document.querySelectorAll(".poke-stats");
 const [image1, name1, attack1, defense1, hp1] =
 [
-  createHtmlElement("img"),
-  createHtmlElement("div"),
-  createHtmlElement("div"),
-  createHtmlElement("div"),
-  createHtmlElement("div")
+  createElement("img"),
+  createElement("div"),
+  createElement("div"),
+  createElement("div"),
+  createElement("div")
 ];
 const [image2, name2, attack2, defense2, hp2] =
 [
-  createHtmlElement("img"),
-  createHtmlElement("div"),
-  createHtmlElement("div"),
-  createHtmlElement("div"),
-  createHtmlElement("div")
+  createElement("img"),
+  createElement("div"),
+  createElement("div"),
+  createElement("div"),
+  createElement("div")
 ];
+
+// Cnost
+const pokemonGenRanges = [[1, 151], [152, 251], [252, 386], [387, 490], [491, 649], [650, 721], [722, 802], [803, 889]];
 const topBasicStats = [image1, name1, attack1, defense1, hp1];
 const bottomBasicStats = [image2, name2, attack2, defense2, hp2];
 const getTwoRandomNumbers = (start = 1, end = 151) => _.shuffle(_.range(start, end)).slice(0, 2);
