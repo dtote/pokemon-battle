@@ -16,6 +16,7 @@
 }
 
 .pokemon-pic {
+  /* image-rendering: pixelated; */
   height: 16rem;
   width: 16rem;
   transition: all 0.5s;
@@ -114,8 +115,4 @@ body {
     2px 2px 2px black,
     -2px -2px 2px black;
   margin-bottom: 1rem;
-}
-
-img {
-  image-rendering: pixelated;
 }
