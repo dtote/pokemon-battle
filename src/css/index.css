@@ -16,11 +16,11 @@
 }
 
 .pokemon-pic {
-  /* image-rendering: pixelated; */
+  image-rendering: pixelated;
   height: 14rem;
   width: 14rem;
   transition: all 0.5s;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 .pokemon-pic:hover {
@@ -43,22 +43,16 @@ body,
 
 body {
   margin: 0;
-  width: 100vw;
-  height: 100vh;
+  height: 55rem;
   background: var(--battle-background);
   flex-direction: column;
   font-family: var(--font-type);
 }
 
 .battle-container {
-  width: 50rem;
-  height: 50rem;
+  width: 40rem;
+  height: 40rem;
   flex-direction: column;
-}
-
-.round-vs {
-  margin: 2rem;
-  color: white;
 }
 
 .pokemon-container {
@@ -100,12 +94,12 @@ body {
 }
 
 .poke-stats {
-  width: 90%;
+  width: 25rem;
+  height: 5rem;
   display: grid;
   grid-template-columns: repeat(2, auto);
   justify-content: space-around;
   align-items: center;
-  height: 4rem;
   background: var(--background-color);
   color: white;
   font-weight: bold;
@@ -116,4 +110,46 @@ body {
     2px 2px 2px black,
     -2px -2px 2px black;
   margin-bottom: 1rem;
+}
+
+@media screen and (max-width: 640px) {
+  body {
+    height: auto;
+  }
+
+  .battle-container {
+    width: 30rem;
+    height: 40rem;
+    padding: 2rem;
+    margin: 2rem;
+  }
+
+  .pokemon-container {
+    width: 20rem;
+    height: 15rem;
+  }
+
+  .pokemon {
+    width: 10rem;
+    height: 10rem;
+  }
+
+  .poke-stats {
+    height: 3rem;
+    width: 15rem;
+  }
+
+  .pokemon-pic {
+    height: 8rem;
+    width: 8rem;
+  }
+
+  .pokemon-pic:hover {
+    height: 10rem;
+    width: 10rem;
+  }
+
+  .middle {
+    margin: 2rem;
+  }
 }
