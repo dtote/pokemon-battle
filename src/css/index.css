@@ -2,7 +2,7 @@
   --background-color: #000;
   --pokemon-container-color: #222;
   --pokemon-background-ground: url("../assets/background-ground.jpg");
-  --battle-background: url("../assets/wp-battle.jpg");
+  --battle-background: url("../assets/wp-battle.jpg") right;
   --font-type: 'EnterCommand';
 }
 
